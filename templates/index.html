@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Praxis Advisory — Claude Skills Multi-Agent Demo</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">P</div>
+    <div>
+      <div class="brand-name">Praxis Advisory</div>
+      <div class="brand-sub">Multi-Agent Engagement Engine · Powered by Claude Skills</div>
+    </div>
+  </div>
+  <button id="skillsBtn" class="ghost-btn">View Agent Skills</button>
+</header>
+
+<main class="layout">
+
+  <section class="panel input-panel">
+    <h2>1. Start an Engagement</h2>
+    <label class="field-label">Anthropic API Key</label>
+    <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off">
+    <p class="hint">Sent only with your request, never stored. Required to actually invoke Claude.</p>
+
+    <label class="field-label">Client Problem Brief</label>
+    <textarea id="brief" rows="7" placeholder="e.g. Our mid-market SaaS company is losing customers to low-cost regional competitors. We are considering a 20% price cut but are worried about margin impact and whether it could trigger predatory-pricing scrutiny in two of our markets."></textarea>
+
+    <div class="examples">
+      <span>Try:</span>
+      <button class="chip" data-ex="0">Pricing & competition</button>
+      <button class="chip" data-ex="1">Layoffs & change mgmt</button>
+      <button class="chip" data-ex="2">Market entry</button>
+    </div>
+
+    <button id="runBtn" class="primary-btn">Run Engagement ▸</button>
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="panel pipeline-panel">
+    <h2>2. Agent Pipeline & Decision Trace</h2>
+    <div id="pipelineViz" class="pipeline-viz">
+      <div class="empty-state">Run an engagement to see which agents are invoked, in what order, and why.</div>
+    </div>
+    <div id="traceAccordion" class="trace-accordion"></div>
+  </section>
+
+  <section class="panel report-panel">
+    <h2>3. Client-Ready Report & Evaluation</h2>
+    <div id="reportArea" class="report-area">
+      <div class="empty-state">The final synthesized recommendation and QA score will appear here.</div>
+    </div>
+  </section>
+
+</main>
+
+<div id="skillsModal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>Claude Skills Driving Each Agent</h3>
+      <button id="closeSkills" class="ghost-btn small">Close</button>
+    </div>
+    <div id="skillsContent" class="skills-content"></div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
